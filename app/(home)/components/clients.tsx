@@ -9,7 +9,7 @@ export default function Clients() {
           Million run on Notion every day
         </h2>
         <p className="text-xl font-semibold mt-2">
-          Powering the world's best teams , from next-generation startups to
+          Powering the world&lsquo;best teams , from next-generation startups to
           established enterprises
         </p>
 
