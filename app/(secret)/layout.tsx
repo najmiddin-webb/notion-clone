@@ -1,5 +1,3 @@
-"use client";
-
 import Loader from "@/components/ui/loader";
 import { ChildProps } from "@/types";
 import { useConvexAuth } from "convex/react";
@@ -7,7 +5,7 @@ import { redirect } from "next/navigation";
 import React from "react";
 import { SideBar } from "./components";
 
-export default function DocumentLayout({ children }: ChildProps) {
+const DocumentLayout = ({ children }: ChildProps) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
 
   if (isLoading) {
@@ -24,10 +22,12 @@ export default function DocumentLayout({ children }: ChildProps) {
 
   return (
     <div className="flex gap-2">
-      <div className="flex ">
+      <div className="flex">
         <SideBar />
       </div>
       <main>{children}</main>
     </div>
   );
-}
+};
+
+export default DocumentLayout;
