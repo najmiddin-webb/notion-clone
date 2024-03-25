@@ -1,5 +1,11 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import Loader from "@/components/ui/loader";
+import { SignInButton } from "@clerk/clerk-react";
+import { useConvexAuth } from "convex/react";
 import { ArrowRight, Check } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 interface PricingShop {
@@ -15,6 +21,8 @@ export default function PricingCard({
   options,
   price,
 }: PricingShop) {
+  const { isAuthenticated, isLoading } = useConvexAuth();
+
   return (
     <div>
       <div className="flex mt-10 flex-col p-6 mx-auto max-w-lg h-full text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-black dark:text-white">
@@ -27,7 +35,18 @@ export default function PricingCard({
           </span>
           <span className="text-gray-500 dark:text-gray-400">/month</span>
         </div>
-        <Button size={"sm"}>Get Started</Button>
+        {!isAuthenticated && isLoading && (
+          <SignInButton>
+            <Button size={"sm"}>Get Notion Free</Button>
+          </SignInButton>
+        )}
+        {isAuthenticated && !isLoading && (
+          <SignInButton>
+            <Button size={"sm"}>
+              <Link href={"/documents"}>Get Started</Link>
+            </Button>
+          </SignInButton>
+        )}
 
         <ul role="list" className="space-y-4 text-left mt-8">
           {options.split(", ").map((option, index) => (
