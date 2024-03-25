@@ -29,6 +29,7 @@ export default function RootLayout({
             disableTransitionOnChange
             storageKey="notion-clone"
           >
+            Yangilandi
             <div className="mx-auto">{children}</div>
           </ThemeProvider>
         </ConvexClientProvider>
