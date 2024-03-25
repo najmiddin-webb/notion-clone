@@ -8,7 +8,7 @@ import React from "react";
 import { SideBar } from "./components";
 import DocumentsPage from "./documents/page";
 
-const SecretLayout = ({ children }: ChildProps) => {
+const secretLayout = ({ children }: ChildProps) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
 
   if (isLoading) {
@@ -31,4 +31,4 @@ const SecretLayout = ({ children }: ChildProps) => {
   );
 };
 
-export default SecretLayout;
+export default secretLayout;
