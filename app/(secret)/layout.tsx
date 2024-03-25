@@ -1,28 +1,10 @@
 "use client";
 
-import Loader from "@/components/ui/loader";
 import { ChildProps } from "@/types";
-import { useConvexAuth } from "convex/react";
-import { redirect } from "next/navigation";
 import React from "react";
 import { SideBar } from "./components";
-import DocumentsPage from "./documents/page";
 
 const secretLayout = ({ children }: ChildProps) => {
-  const { isAuthenticated, isLoading } = useConvexAuth();
-
-  if (isLoading) {
-    return (
-      <div className="w-full h-full flex items-center justify-center">
-        <Loader />
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return redirect("/");
-  }
-
   return (
     <div className="flex w-full">
       <SideBar />
