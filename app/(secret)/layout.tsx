@@ -1,3 +1,5 @@
+"use client";
+
 import Loader from "@/components/ui/loader";
 import { ChildProps } from "@/types";
 import { useConvexAuth } from "convex/react";
