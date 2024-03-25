@@ -6,6 +6,7 @@ import { useConvexAuth } from "convex/react";
 import { redirect } from "next/navigation";
 import React from "react";
 import { SideBar } from "./components";
+import DocumentsPage from "./documents/page";
 
 const SecretLayout = ({ children }: ChildProps) => {
   const { isAuthenticated, isLoading } = useConvexAuth();

@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { ChevronsLeft, ChevronsRight, MenuIcon } from "lucide-react";
 import React, { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
+import DocumentsPage from "../documents/page";
 
 export default function SideBar() {
   const sideBarRef = useRef<ElementRef<"div">>(null);
@@ -119,6 +120,7 @@ export default function SideBar() {
         <nav className={cn("bg-transparent py-2")}>
           {collapsed && <ChevronsRight role="button" className="text-2xl " />}
         </nav>
+        <DocumentsPage />
       </div>
     </>
   );
