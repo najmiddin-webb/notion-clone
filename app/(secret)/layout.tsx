@@ -7,12 +7,12 @@ import { redirect } from "next/navigation";
 import React from "react";
 import { SideBar } from "./components";
 
-const DocumentLayout = ({ children }: ChildProps) => {
+const SecretLayout = ({ children }: ChildProps) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="w-full h-full flex items-center justify-center">
         <Loader />
       </div>
     );
@@ -23,13 +23,11 @@ const DocumentLayout = ({ children }: ChildProps) => {
   }
 
   return (
-    <div className="flex gap-2">
-      <div className="flex">
-        <SideBar />
-      </div>
-      <main>{children}</main>
+    <div className="flex w-full">
+      <SideBar />
+      <main className="flex-1 h-full overflow-y-auto">{children}</main>
     </div>
   );
 };
 
-export default DocumentLayout;
+export default SecretLayout;
