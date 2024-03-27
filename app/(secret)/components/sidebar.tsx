@@ -5,6 +5,7 @@ import { ChevronsLeft, ChevronsRight, MenuIcon } from "lucide-react";
 import React, { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import DocumentsPage from "../documents/page";
+import DocumentsList from "./documents-list";
 
 export default function SideBar() {
   const sideBarRef = useRef<ElementRef<"div">>(null);
@@ -90,7 +91,7 @@ export default function SideBar() {
     <>
       <div
         className={cn(
-          "group w-72 h-screen relative backdrop-blur-xl bg-secondary overflow-y-auto transition duration-300 flex flex-col",
+          "group w-72 min-h-screen relative backdrop-blur-xl bg-secondary overflow-y-auto transition duration-300 flex flex-col",
           isReseting && "transition-all duration-500",
           isMobile && "w-0"
         )}
@@ -103,6 +104,10 @@ export default function SideBar() {
         >
           <ChevronsLeft className="w-6 h-6" />
         </div>
+
+        <div>User profile</div>
+
+        <DocumentsList />
         <div
           onMouseDown={handleMouseDown}
           className="absolute top-00 right-0 w-1 h-screen bg-slate-500 opacity-0 cursor-ew-resize group-hover:opacity-100 transition duration"
