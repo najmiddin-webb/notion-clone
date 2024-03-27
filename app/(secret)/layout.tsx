@@ -24,7 +24,7 @@ const secretLayout = ({ children }: ChildProps) => {
   return (
     <div className="flex w-full">
       <SideBar />
-      <main className="flex-1 h-full overflow-y-auto">{children}</main>
+      <div className="flex-1 h-full overflow-y-auto">{children}</div>
     </div>
   );
 };
