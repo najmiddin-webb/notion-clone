@@ -11,7 +11,7 @@ import React from "react";
 
 export default function DocumentsPage() {
   const { user } = useUser();
-  const createDocument = useMutation(api.documents.createDocument);
+  const createDocument = useMutation(api.document.createDocument);
 
   const onCreateDocument = () => {
     createDocument({
@@ -36,11 +36,9 @@ export default function DocumentsPage() {
           height={300}
           className="object-cover hidden dark:block"
         />
-
         <h2>
           Welcome to <b> {user?.fullName}</b>`s documents page!
         </h2>
-
         <Button className="flex gap-2 items-center" onClick={onCreateDocument}>
           <Plus className="w-4 h-4" />
           Create a new blank

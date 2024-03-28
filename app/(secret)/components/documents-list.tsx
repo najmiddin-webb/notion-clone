@@ -3,31 +3,62 @@ import { Id } from "@/convex/_generated/dataModel";
 import { useQuery } from "convex/react";
 import React, { useState } from "react";
 import Item from "./item";
+import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 interface DocumentListProps {
-  documentID?: Id<"documents">;
+  documentId?: Id<"documents">;
   level?: number;
 }
 
 export default function DocumentsList({
-  documentID,
+  documentId,
   level = 0,
 }: DocumentListProps) {
   const [expended, setExpended] = useState<Record<string, boolean>>({});
+  const router = useRouter();
 
-  const onExpended = (documentID: string) => {
+  const onExpended = (documentId: string) => {
     setExpended((prev) => ({
       ...prev,
-      [documentID]: !prev[documentID],
+      [documentId]: !prev[documentId],
     }));
   };
-
-  const documents = useQuery(api.documents.getDocuments, {
-    parentDocument: documentID,
+  const documents = useQuery(api.document.getDocuments, {
+    parentDocument: documentId,
   });
 
+  const onRedirect = (documentId: string) => {
+    router.push(`/documents/${documentId}`);
+  };
+
+  if (documents === undefined) {
+    return (
+      <>
+        <Item.Skeleton level={level} />
+
+        {level === 0 && (
+          <>
+            <Item.Skeleton level={level} />
+            <Item.Skeleton level={level} />
+          </>
+        )}
+      </>
+    );
+  }
+
   return (
-    <div className="">
+    <div>
+      <p
+        className={cn(
+          "hidden text-sm font-medium text-muted-foreground/80",
+          expended && "last:block"
+        )}
+        style={{ paddingLeft: level ? `${level * 12 + 25}px` : undefined }}
+      >
+        No documents
+      </p>
+
       {documents?.map((document) => (
         <div key={document._id}>
           <Item
@@ -36,9 +67,10 @@ export default function DocumentsList({
             id={document._id}
             expended={expended[document._id]}
             onExpended={() => onExpended(document._id)}
+            onClick={() => onRedirect(document._id)}
           />
           {expended[document._id] && (
-            <DocumentsList documentID={document._id} level={level + 1} />
+            <DocumentsList documentId={document._id} level={level + 1} />
           )}
         </div>
       ))}

@@ -3,9 +3,10 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-import { createDocument } from "@/convex/documents";
+import { createDocument } from "@/convex/document";
 import { useUser } from "@clerk/clerk-react";
 import {
   DropdownMenu,
@@ -15,7 +16,6 @@ import { useMutation } from "convex/react";
 import {
   ChevronDown,
   ChevronRight,
-  FlipHorizontal,
   MoreHorizontal,
   Plus,
   Trash,
@@ -28,17 +28,19 @@ interface ItemProps {
   level: number;
   expended?: boolean;
   onExpended?: () => void;
+  onClick: () => void;
 }
 
 export default function Item({
   id,
   label,
   level,
+  onClick,
   expended,
   onExpended,
 }: ItemProps) {
   const { user } = useUser();
-  const createDocument = useMutation(api.documents.createDocument);
+  const createDocument = useMutation(api.document.createDocument);
 
   const onCreateDocument = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -70,6 +72,8 @@ export default function Item({
     <div
       style={{ paddingLeft: level ? `${level * 12 + 12}px` : "12px" }}
       className="group min-h-[27px] text-sm py-1 pr-3 w-full hover:bg-primary/5 flex items-center text-muted-foreground font-medium"
+      role="button"
+      onClick={onClick}
     >
       {!!id && (
         <div
@@ -122,3 +126,15 @@ export default function Item({
     </div>
   );
 }
+
+Item.Skeleton = function ({ level }: { level?: number }) {
+  return (
+    <div
+      style={{ paddingLeft: level ? `${level * 12 + 12}px` : "12px" }}
+      className="flex gap-x-2 py-1"
+    >
+      <Skeleton className="w-4 h-4" />
+      <Skeleton className="w-[30%] h-" />
+    </div>
+  );
+};
